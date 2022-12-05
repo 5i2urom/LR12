@@ -1,0 +1,42 @@
+<% if @count!=0 %>
+    <p>Все отрезки:</p>
+    <table border=1>
+        <tr>            
+            <td>
+                №
+            </td> 
+            <td>
+                отрезок 
+            </td>                   
+        </tr>
+        <% adder=0%>   
+        <% @all_seqs.each do |stroka| %>    
+            <tr>            
+                <td>
+                    <%= adder+=1%>
+                </td> 
+                <td>
+                <center> <%= stroka.join(', ') %>  </center> 
+                </td>                   
+            </tr>
+        <% end %>
+    </table>
+
+    <p> Самый длинный отрезок:</p>
+    <div>
+        <%= @all_seqs.max{|s1, s2| s1.length <=> s2.length}.join(', ')%> 
+    </div>
+
+    <p> Количество отрезков:</p>
+    <%= @count %>
+    <br><br>
+
+<% else %>
+    <div class = "container">    
+    <% flash.each do |type, msg| %>
+      <div class='alert alert-info'>
+        <%= msg %>
+      </div>
+    <% end %>
+    </div>
+<% end %>
