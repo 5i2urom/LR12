@@ -1,0 +1,25 @@
+<%= form_with url: show_path do |form| %>
+    <table>
+        <tr>
+            <td>
+                <%= form.label("Введите количество чисел: ") %>
+            </td>
+            <td>
+                <%= form.text_field :num, :value => 10 %> <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <%= form.label("Введите последовательность: ") %>
+            </td>
+            <td>
+                <%= form.text_field :str, :value => "6 28 3 4 5 6 6 496 3 6" %> <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <%= form.submit("Вывести") %>
+            </td>
+        </tr>
+    </table>  
+<% end %>
