@@ -5,18 +5,17 @@ class SeqController < ApplicationController
   include SeqHelper
   def input; end
 
-  def show    
-    @seq=SeqShow.new(seq_params)
-        
+  def show
+    @seq = SeqShow.new(seq_params)
+
     m = perfect(seq)
     @all_seqs = m[0]
     @count = m[1]
   end
-  
+
   private
 
   def seq_params
     params.permit(:num, :str)
   end
-
 end

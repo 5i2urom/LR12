@@ -24,12 +24,12 @@
         </table>
 
         <p> Самый длинный отрезок:</p>
-        <div>
-            <%= @all_seqs.max{|s1, s2| s1.length <=> s2.length}.join(', ')%> 
+        <div id='longest'>
+            <%= @all_seqs.max{|s1, s2| s1.length <=> s2.length}.join(' ')%> 
         </div>
 
         <p> Количество отрезков:</p>
-        <%= @count %>
+        <div id='count'> <%= @count %> </div>
         <br><br>
 
     <% else %>
