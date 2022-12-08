@@ -37,7 +37,6 @@ module SeqHelper
       match = false
       count += 1
     end
-    flash[:error] = 'В последовательности нет совершенных чисел' if count.zero?
     [all_seqs, count]
   end
 end

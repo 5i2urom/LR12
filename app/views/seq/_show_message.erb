@@ -1,42 +1,46 @@
-<% if @count!=0 %>
-    <p>Все отрезки:</p>
-    <table border=1>
-        <tr>            
-            <td>
-                №
-            </td> 
-            <td>
-                отрезок 
-            </td>                   
-        </tr>
-        <% adder=0%>   
-        <% @all_seqs.each do |stroka| %>    
+<% if @seq.valid? %>
+    <% if @count!=0 %>
+        <p>Все отрезки:</p>
+        <table border=1>
             <tr>            
                 <td>
-                    <%= adder+=1%>
+                    №
                 </td> 
                 <td>
-                <center> <%= stroka.join(', ') %>  </center> 
+                    отрезок 
                 </td>                   
             </tr>
-        <% end %>
-    </table>
+            <% adder=0%>   
+            <% @all_seqs.each do |stroka| %>    
+                <tr>            
+                    <td>
+                        <%= adder+=1%>
+                    </td> 
+                    <td>
+                    <center> <%= stroka.join(', ') %>  </center> 
+                    </td>                   
+                </tr>
+            <% end %>
+        </table>
 
-    <p> Самый длинный отрезок:</p>
-    <div>
-        <%= @all_seqs.max{|s1, s2| s1.length <=> s2.length}.join(', ')%> 
-    </div>
+        <p> Самый длинный отрезок:</p>
+        <div>
+            <%= @all_seqs.max{|s1, s2| s1.length <=> s2.length}.join(', ')%> 
+        </div>
 
-    <p> Количество отрезков:</p>
-    <%= @count %>
-    <br><br>
+        <p> Количество отрезков:</p>
+        <%= @count %>
+        <br><br>
+
+    <% else %>
+    В последовательности нет совершенных чисел
+    <% end %>
 
 <% else %>
-    <div class = "container">    
-    <% flash.each do |type, msg| %>
-      <div class='alert alert-info'>
-        <%= msg %>
-      </div>
+ <h2>Ошибки ввода:</h2>
+  <ul>
+    <% @seq.errors.each do |error| %>
+      <li><%= error.full_message %></li>
     <% end %>
-    </div>
+  </ul>
 <% end %>
