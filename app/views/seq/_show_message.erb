@@ -1,5 +1,5 @@
-<% if @seq.valid? %>    
-    <% if @count!=0 %>
+<% if @seq.valid? %>  
+    <% if @count>0 %>
         <p>Все отрезки:</p>
         <table border=1>
             <tr>            
@@ -17,7 +17,7 @@
                         <%= adder+=1%>
                     </td> 
                     <td>
-                    <center> <%= stroka.join(', ') %>  </center> 
+                    <center> <%= stroka %>  </center> 
                     </td>                   
                 </tr>
             <% end %>
@@ -25,7 +25,7 @@
 
         <p> Самый длинный отрезок:</p>
         <div id='longest'>
-            <%= @all_seqs.max{|s1, s2| s1.length <=> s2.length}.join(' ')%> 
+            <%= @longest %> 
         </div>
 
         <p> Количество отрезков:</p>

@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Static content', type: :system do
-  let(:my_num) { rand(1..100) }
-  let(:my_str) { '6 28 3 4 5 6 6 496 3 6' }
+  let(:str) { '6 28 3 4 5 6 6 496 3 6' }
+  let(:num) { 10 }
 
   scenario 'test this page' do
     visit root_path
 
-    fill_in :num, with: my_num
-    fill_in :str, with: my_str
+    fill_in :num, with: num
+    fill_in :str, with: str
 
     click_button('Вывести')
 
@@ -28,11 +28,24 @@ RSpec.describe 'Static content', type: :system do
     end
   end
 
-  scenario 'wrong input' do
+  scenario 'added string to seq' do
     visit root_path
 
-    fill_in :num, with: my_num
-    fill_in :str, with: "#{my_str}k"
+    fill_in :num, with: num
+    fill_in :str, with: "#{str}k"
+
+    click_button('Вывести')
+
+    SeqShow.new.errors.messages.each do |message|
+      expect(find('#show-container')).to have_text(message)
+    end
+  end
+
+  scenario 'wrong length' do
+    visit root_path
+
+    fill_in :num, with: num + 5
+    fill_in :str, with: str
 
     click_button('Вывести')
 

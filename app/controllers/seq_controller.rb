@@ -11,7 +11,8 @@ class SeqController < ApplicationController
     m = perfect(seq)
     @all_seqs = m[0]
     @count = m[1]
-  end  
+    @longest = @all_seqs.max { |s1, s2| s1.split(' ').length <=> s2.split(' ').length }
+  end
 
   private
 

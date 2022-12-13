@@ -2,16 +2,12 @@
 
 # operates with a sequence
 module SeqHelper
-  def seq
-    params[:str].chomp.split(' ').map(&:to_i)
-  end
-
-  def len
-    params[:num].to_f
-  end
+  def seq = params[:str]
+  def len = params[:num]
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-  def perfect(seq)
+  def perfect(seq_str)
+    seq = seq_str.chomp.split(' ').map(&:to_i)
     count = 0
     all_seqs = []
     curr_seq = []
@@ -26,7 +22,7 @@ module SeqHelper
         curr_seq.push(num.clone)
         match = true
       elsif match
-        all_seqs.push(curr_seq.clone)
+        all_seqs.push(curr_seq.clone.join(' '))
         curr_seq.clear
         match = false
         count += 1
@@ -34,12 +30,12 @@ module SeqHelper
     end
 
     if match
-      all_seqs.push(curr_seq.clone)
+      all_seqs.push(curr_seq.clone.join(' '))
       curr_seq.clear
       match = false
       count += 1
     end
-    [all_seqs, count]
+    [all_seqs, count] # массив строк и число
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end
