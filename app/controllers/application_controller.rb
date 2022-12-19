@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+    helper_method :current_user, :signed_in?
     private
-    # Возвращает объект User с ID, сохраненный в session с ключом
-    # :current_user_id Это стандартный способ для Rails
-    # Процедура входа устанавливает значение сессии
-    # Процедура выхода сбрасывает значение сессии
-    def current_user # авторизованный пользователь
+
+    def current_user
         @_current_user ||= session[:user_id] &&
         User.find_by_id(session[:user_id])
     end
@@ -17,14 +15,13 @@ class ApplicationController < ActionController::Base
 
     def no_authorize
         return unless signed_in?
-        flash[:warning] = 'You are already logged in'
+        flash[:warning] = 'Вы уже авторизованы'
         redirect_to root_path
     end
 
     def authorize
         return if signed_in?
-        flash[:warning] = 'You are not logged in'
+        flash[:warning] = 'Вы не авторизованы'
         redirect_to new_session_path
-    end
-    helper_method :current_user, :signed_in?
+    end    
 end

@@ -14,18 +14,18 @@
   <nav class="navbar navbar-light bg-light">
     <ul class = "nav col-12 col-lg-auto mb-2 mb-md-0">
           <% if signed_in? %>        
-            <li><%= link_to 'Sequence', root_path, class: 'nav-link px-2', id: 'sing_up_button' %></li>
-            <li><%= link_to 'All users', root_path, class: 'nav-link px-2', id: 'sing_up_button' %></li>
+            <li><%= link_to 'Последовательность', input_path, class: 'nav-link px-2', id: 'sing_up_button' %></li>
+            <li><%= link_to 'Все пользователи', users_show_path, class: 'nav-link px-2', id: 'sing_up_button' %></li>
           <% end %>
     </ul>
 
     <ul class = "nav col-12 col-lg-auto mb-2 mb-md-0">
       <% if signed_in? %>
           <span class="navbar-brand mb-0 h1"><%= current_user.name %></span>          
-          <li><%= link_to 'Quit', session_path, data: {turbo_method: :delete}, class: 'nav-link px-2', id: 'sing_up_button' %></li>
+          <li><%= link_to 'Выйти', session_path, data: {turbo_method: :delete}, class: 'nav-link px-2', id: 'sing_up_button' %></li>
       <% else %>
-          <li><%= link_to 'Sign up', new_user_path, class: 'nav-link px-2', id: 'sing_up_button' %></li>
-          <li><%= link_to 'Sign in', new_session_path, class: 'nav-link px-2', id: 'sing_up_button' %></li>
+          <li><%= link_to 'Регистрация', new_user_path, class: 'nav-link px-2', id: 'sing_up_button' %></li>
+          <li><%= link_to 'Вход', new_session_path, class: 'nav-link px-2', id: 'sing_up_button' %></li>
       <% end %>
     </ul>
   </nav>

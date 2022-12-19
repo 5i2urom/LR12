@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-    
+    include ActiveModel::Serializers::Xml
+        
     has_secure_password
 
     validates :name, presence: true

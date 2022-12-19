@@ -1,14 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
-  #before_action :authenticate, except: [:new, :create]
+  before_action :set_user, only: %i[edit update destroy ]
+  before_action :authorize, except: %i[new create]
+  before_action :no_authorize, only: %i[new create]
 
-  # GET /users or /users.json
-  def index
+  def show
     @users = User.all
-  end
-
-  # GET /users/1 or /users/1.json
-  def show # не использую 
+    render xml: @users
   end
 
   # GET /users/new
@@ -32,7 +29,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)

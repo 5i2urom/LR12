@@ -16,12 +16,6 @@ class SeqController < ApplicationController
     @longest = @all_seqs.max { |s1, s2| s1.split(' ').length <=> s2.split(' ').length }
   end
 
-  # def self.authenticate(email, password)
-  #   user = find(email)
-  #   return nil if user.nil?
-  #   return user if user.has_password?(password)
-  # end
-
   private
 
   def seq_params
