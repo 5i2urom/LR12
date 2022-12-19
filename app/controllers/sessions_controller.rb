@@ -6,18 +6,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate(params[:email], params[:password])
-      # Сохраняем идентификатор пользователя ID в сессию
-      # для последующего использования
-      session[:current_user_id] = user.id
+    user = User.find_by(email: params[:email])
+    if user&.authenticate(params[:password])
+      session[:user_id] = user.id
       redirect_to root_url
+    else
+      flash[:error] = 'Неверный логин и/или пароль'
+      redirect_to new_session_path
     end
   end
 
   def destroy
-    # Удалить id пользователя из session
-    @_current_user = session[:current_user_id] = nil
-    redirect_to root_url
+    @_current_user = session[:user_id] = nil
+    redirect_to new_session_path
   end
-
 end

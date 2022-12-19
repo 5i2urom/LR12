@@ -24,10 +24,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)    
     if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+      session[:user_id] = @user.id
+      flash[:success] = "Добро пожаловать, #{@user.name}!"
+      redirect_to root_path
     else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+      redirect_to new_user_path, notice: 'Ошибка во вводе данных или вы уже зарегистрированы'
     end
   end
 
@@ -62,6 +63,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.permit(:name, :email, :password, :password_confirmation)
     end
 end

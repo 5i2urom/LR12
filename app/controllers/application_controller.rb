@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
     # Процедура входа устанавливает значение сессии
     # Процедура выхода сбрасывает значение сессии
     def current_user # авторизованный пользователь
-        @_current_user ||= session[:current_user_id] &&
-        User.find_by_id(session[:current_user_id])
+        @_current_user ||= session[:user_id] &&
+        User.find_by_id(session[:user_id])
     end
 
     def signed_in?
