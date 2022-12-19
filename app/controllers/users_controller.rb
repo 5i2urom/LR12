@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
+# users
 class UsersController < ApplicationController
   before_action :authorize, except: %i[new create]
   before_action :no_authorize, only: %i[new create]
 
   # GET /users/new
-  def new
-  end
+  def new; end
 
   # POST /users
   def create
-    @user = User.new(user_params)    
+    @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = "Добро пожаловать, #{@user.name}!"
@@ -24,7 +26,8 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.permit(:name, :email, :password, :password_confirmation)
-    end
+
+  def user_params
+    params.permit(:name, :email, :password, :password_confirmation)
+  end
 end
