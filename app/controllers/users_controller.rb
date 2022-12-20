@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @users = User.all
+    @users = User.select(:id, :name, :email, :created_at, :updated_at)
     render xml: @users
   end
 
